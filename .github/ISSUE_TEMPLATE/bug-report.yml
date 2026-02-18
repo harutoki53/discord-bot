@@ -1,0 +1,34 @@
+name: 🐞 お問い合わせフォーム
+description: カテゴリーを選んでお問い合わせいただけます
+title: "[お問い合わせ]: _ID記入"
+labels: ["pending"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### お問い合わせありがとうございます。
+        回答が必要な場合はメールアドレスを入力してください。
+  - type: input
+    id: email
+    attributes:
+      label: メールアドレス（任意）
+      placeholder: example@example.com
+  - type: dropdown
+    id: os
+    attributes:
+      label: 使用している機種/環境
+      options: [windows, mac, linux, android, ios, web]
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: 【必須】詳しい内容
+      placeholder: 質問や不具合の内容を詳しく教えてください
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 画像・スクリーンショット（任意）
+      description: 画像をここにドラッグ&ドロップして貼り付けできます
