@@ -1,0 +1,53 @@
+name: Category Labeler
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  labeling:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Process Labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const title = context.payload.issue.title;
+            const match = title.match(/_(\d+)$/);
+            const id = match ? match[1] : "0";
+
+            // 設定ファイルの読み込み
+            let categoryName = "その他・未登録";
+            if (fs.existsSync('.github/categories.txt')) {
+              const content = fs.readFileSync('.github/categories.txt', 'utf8');
+              const lines = content.split('\n');
+              for (const line of lines) {
+                const [name, lineId] = line.split('=');
+                if (lineId && lineId.trim() === id) {
+                  categoryName = name.trim();
+                  break;
+                }
+              }
+            }
+
+            // ラベルの付与
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [categoryName]
+            });
+
+            // 確認コメント（必要なければ削除してください）
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `受付完了：カテゴリー【${categoryName}】として登録しました。`
+            });
