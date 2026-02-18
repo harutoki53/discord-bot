@@ -1,29 +1,18 @@
-name: 報告・お問い合わせ
-description: 不具合の報告や、画像を含めた詳細な相談はこちらから
+name: お問い合わせ・報告
+description: URLの共有や相談はこちらからお願いします。
 body:
-  - type: dropdown
-    id: category
+  - type: markdown
     attributes:
-      label: カテゴリー
-      options:
-        - インストール
-        - 使い方
-        - 不具合報告
-        - その他
-    validations:
-      required: true
+      value: |
+        ### 📮 お問い合わせガイド
+        - サイトURL: [https://supports.harutoki53.com/](https://supports.harutoki53.com/)
+        - 以下の入力欄に、URLや相談内容、画像を自由に貼り付けてください。
 
   - type: textarea
-    id: description
+    id: contact_details
     attributes:
-      label: 詳細内容
-      description: ここに詳しい内容を書いてください。画像はここに直接ドラッグ＆ドロップすればアップロードできます。
-      placeholder: どのような状況で問題が発生しましたか？
+      label: 内容
+      description: URLや画像、メッセージをここに自由に書いてください。
+      placeholder: 例：URL「https://...」について相談です。
     validations:
       required: true
-
-  - type: textarea
-    id: env
-    attributes:
-      label: 実行環境
-      placeholder: OSの種類や、使っているBotのバージョンなど
