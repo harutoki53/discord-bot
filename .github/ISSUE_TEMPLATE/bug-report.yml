@@ -1,34 +1,29 @@
-name: 🐞 お問い合わせフォーム
-description: カテゴリーを選んでお問い合わせいただけます
-title: "[お問い合わせ]: _ID記入"
-labels: ["pending"]
+name: 報告・お問い合わせ
+description: 不具合の報告や、画像を含めた詳細な相談はこちらから
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ### お問い合わせありがとうございます。
-        回答が必要な場合はメールアドレスを入力してください。
-  - type: input
-    id: email
-    attributes:
-      label: メールアドレス（任意）
-      placeholder: example@example.com
   - type: dropdown
-    id: os
+    id: category
     attributes:
-      label: 使用している機種/環境
-      options: [windows, mac, linux, android, ios, web]
+      label: カテゴリー
+      options:
+        - インストール
+        - 使い方
+        - 不具合報告
+        - その他
     validations:
       required: true
+
   - type: textarea
-    id: content
+    id: description
     attributes:
-      label: 【必須】詳しい内容
-      placeholder: 質問や不具合の内容を詳しく教えてください
+      label: 詳細内容
+      description: ここに詳しい内容を書いてください。画像はここに直接ドラッグ＆ドロップすればアップロードできます。
+      placeholder: どのような状況で問題が発生しましたか？
     validations:
       required: true
+
   - type: textarea
-    id: screenshots
+    id: env
     attributes:
-      label: 画像・スクリーンショット（任意）
-      description: 画像をここにドラッグ&ドロップして貼り付けできます
+      label: 実行環境
+      placeholder: OSの種類や、使っているBotのバージョンなど
